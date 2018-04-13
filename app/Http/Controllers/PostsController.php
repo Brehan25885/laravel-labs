@@ -10,10 +10,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        dd('ik');
         $posts = Post::all();
-        $post = $posts->first();
-dd($posts);
+        //$post = $posts->first();
         return view('posts.index',[
 
             'posts' => $posts
@@ -40,4 +38,33 @@ dd($posts);
         
        return redirect(route('posts.index')); 
     }
+    public function destroy(Post $post)
+    {
+       $post->delete();
+        //$post = $posts->first();
+        return redirect(route('posts.index'));
+    }
+    public function edit (Post $post)
+    {
+       $users = User::all(); 
+       return view('posts.edit',[
+            'posts' => $post,
+            'users' => $users
+
+        ]);
+    }
+    public function update (Request $request,Post $post)
+     {  $post->title=$request->title;
+        $post->description=$request->description;
+        $post->user_id = $request->user_id;
+        $post->save();
+       /*  $post->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->user_id
+        ]); */
+
+    return redirect(route('posts.index'));
+
+}
 }
