@@ -13,7 +13,7 @@
     </div>
 @endif
 
-
+<div class="container">
 <form method="post" action="/posts">
 {{csrf_field()}}
 Title :- <input type="text" name="title">
@@ -32,5 +32,5 @@ Post Creator
 <br>
 <input type="submit" value="Submit" class="btn btn-primary">
 </form>
-
+</div>
 @endsection
