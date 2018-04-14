@@ -29,6 +29,13 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+        //validation 
+        /* $request->validate([
+            'title'=>'required|min:3|max:255',
+            'description' => 'required',
+        ],[
+            'title.required'=>'write in the title field'//customize default messages
+        ]); */
         // dd($request->all());
         Post::create([
             'title' => $request->title,
