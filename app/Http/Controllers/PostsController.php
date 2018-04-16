@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\StorePostRequests;
+use App\Http\Requests\UpdatePostRequests;
 
 class PostsController extends Controller
 {
@@ -52,8 +53,10 @@ class PostsController extends Controller
         //$post = $posts->first();
         return redirect(route('posts.index'));
     }
-    public function edit (Post $post)
+    public function edit ($id)
     {
+        $post=Post::find($id);
+
        $users = User::all(); 
        return view('posts.edit',[
             'posts' => $post,
@@ -61,8 +64,10 @@ class PostsController extends Controller
 
         ]);
     }
-    public function update (StorePostRequests $request,Post $post)
-     {  $post->title=$request->title;
+    public function update (UpdatePostRequests $request, $id)
+     {  
+        $post=Post::find($id);
+        $post->title=$request->title;
         $post->description=$request->description;
         $post->user_id = $request->user_id;
         $post->save();

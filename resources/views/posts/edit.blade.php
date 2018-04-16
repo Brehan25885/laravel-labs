@@ -15,17 +15,21 @@
 <div class="container">
 <form method="post" action="/posts/{{$posts->id}}/update">
 {{csrf_field()}}
+{{method_field('PUT')}}
 
 Title :- <input type="text" name="title" value="{{$posts->title}}">
 <br><br>
 Description :- 
-<textarea name="description" value="{{$posts->description}}" ></textarea>
+<textarea name="description" >{{$posts->description}}</textarea>
 <br>
 <br>
 Post Creator
 <select class="form-control" name="user_id">
+<option value="{{$posts->user->id}}">{{$posts->user->name}}</option>
 @foreach ($users as $user)
-    <option value="{{$user->id}}">{{$user->name}}</option>
+<option value="{{$user->id}}">
+   {{$user->name}}
+   </option>
 @endforeach
 
 </select>

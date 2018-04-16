@@ -18,14 +18,13 @@ Route::get('/', function () {
 Route::get(
     'posts',
     'PostsController@index'
-)->name('posts.index') ;
-//->middleware('auth');
+)->name('posts.index') ->middleware('auth');
 
 Route::get('posts/create','PostsController@create');
 Route::post('posts','PostsController@store');
 Route::delete('posts/{post}','PostsController@destroy');
-Route::GET('posts/{post}/edit','PostsController@edit');
-Route::post('posts/{post}/update','PostsController@update');
+Route::get('posts/{post}/edit','PostsController@edit');
+Route::put('posts/{post}/update','PostsController@update');
 Route::get('posts/{post}/more','PostsController@showMore');
 
 Auth::routes();
