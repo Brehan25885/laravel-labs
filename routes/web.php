@@ -25,9 +25,11 @@ Route::get('posts/create','PostsController@create');
 Route::post('posts','PostsController@store');
 Route::delete('posts/{post}','PostsController@destroy');
 Route::GET('posts/{post}/edit','PostsController@edit');
-Route::post('posts/{post}/update','PostsController@update');
+Route::put('posts/{post}/update','PostsController@update');
 Route::get('posts/{post}/more','PostsController@showMore');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');

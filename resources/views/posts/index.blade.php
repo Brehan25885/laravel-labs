@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 
 @section('content')
@@ -16,6 +16,11 @@
 <td>
 {{ $post->title }} </td>
 <td>
+{{ $post->slug }} </td>
+
+<td>
+{{ $post->user->name }} </td>
+<td>
 <a class="btn btn-info" href="posts/{{$post->id}}/more" role="button">View</a>
 </td>
 <td >
@@ -25,10 +30,12 @@
     <button onclick="return confirm('are you sure')" type="submit" class="btn btn-danger" > Delete </button>
 </form>
 </td>
+<!-- <td>
+<a class="btn btn-primary" href="posts/{{$post->id}}/edit" role="button">Edit</a>
+</td> -->
 <td >
-<form method="get" action="/posts/{{$post->id}}/edit" >
+<form method="GET" action="/posts/{{$post->id}}/edit" >
     {{csrf_field()}}
-    {{method_field('EDIT')}}
     <button type="submit" class="btn btn-primary" > Edit </button>
 </form>
 </td>
