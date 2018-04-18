@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\User;
+use App\Http\Resources\UserResourse;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
@@ -42,8 +43,13 @@ class LoginController extends Controller
     }
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('github')->user();
+       $user = Socialite::driver('github')->user();
+       $token = $user->token;
+        $userGet = Socialite::driver('github')->userFromToken($token);
 
-        // $user->token;
+        dd($userGet);
+        $createdUser= User::create($user->all());
+        //return $createdUser;
+        return redirect(route('posts.index'));         // $user->token;
     }
 }

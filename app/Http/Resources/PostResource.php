@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-
+use App\Http\Resources\UserResourse;
 use Illuminate\Http\Resources\Json\Resouprce;
 
 class PostResource extends Resource
@@ -14,12 +14,13 @@ class PostResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
-        /*  return [ //so if the values name on the front end differs from the backend, it maps the variables name (cols) on the database to that on the html pages
+/*         return parent::toArray($request);
+ */      
+   return [ //so if the values name on the front end differs from the backend, it maps the variables name (cols) on the database to that on the html pages
             'my_new_title'=> $this->title,
             'description'=>$this->description,
-            'createdby'=>$this->user->name,
+            'user'=>new UserResourse($this->user),
 
-        ];  */
+        ]; 
     }
 }
